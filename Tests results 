@@ -1,0 +1,108 @@
+> erintest@1.0.0 test /Users/omar/ErinTest
+> mocha -r ts-node/register 'app/tests/TestClass.ts'
+
+
+
+  Guard Tests
+    Guard Class tests: isString()
+      ✔ Check isString with String with no CheckOnly Option
+      ✔ Check isString with String with CheckOnly Option
+      ✔ Check isString with AlphaNumeric with no CheckOnly Option
+      ✔ Check isString with AlphaNumeric with CheckOnly Option
+      ✔ Check isString with Numeric with no CheckOnly Option
+      ✔ Check isString with Numeric with CheckOnly Option
+      ✔ Check isNumeric with Date with no CheckOnly Option
+      ✔ Check isNumeric with Date with CheckOnly Option
+      ✔ Check isString with nonSQL injection with no CheckOnly Option
+      ✔ Check isString with nonSQL injection with CheckOnly Option
+    Guard Class tests: isNumeric()
+      ✔ Check isNumeric with Number with no CheckOnly Option
+      ✔ Check isNumeric with Number with CheckOnly Option
+    Guard Class tests: isAlphaNumeric()
+      ✔ Check isAlphaNumeric with String with no CheckOnly Option
+      ✔ Check isAlphaNumeric with String with CheckOnly Option
+      ✔ Check isAlphaNumeric with AlphaNumeric with no CheckOnly Option
+      ✔ Check isAlphaNumeric with AlphaNumeric with CheckOnly Option
+      ✔ Check isAlphaNumeric with Numeric with no CheckOnly Option
+      ✔ Check isAlphaNumeric with Numeric with CheckOnly Option
+      ✔ Check isNumeric with Date with no CheckOnly Option
+      ✔ Check isNumeric with Date with CheckOnly Option
+      ✔ Check isAlphaNumeric with nonSQL injection with no CheckOnly Option
+      ✔ Check isAlphaNumeric with nonSQL injection with CheckOnly Option
+    Guard Class tests: isValidLocation()
+      ✔ Check isValidLocation with String with no CheckOnly Option
+      ✔ Check isValidLocation with String with CheckOnly Option
+      ✔ Check isValidLocation with AlphaNumeric with no CheckOnly Option
+      ✔ Check isValidLocation with AlphaNumeric with CheckOnly Option
+      ✔ Check isValidLocation with Numeric with no CheckOnly Option
+      ✔ Check isValidLocation with Numeric with CheckOnly Option
+      ✔ Check isNumeric with Date with no CheckOnly Option
+      ✔ Check isNumeric with Date with CheckOnly Option
+      ✔ Check isValidLocation with nonSQL injection with no CheckOnly Option
+      ✔ Check isValidLocation with nonSQL injection with CheckOnly Option
+      ✔ Check isValidLocation with Location: Correct Format
+      ✔ Check isValidLocation with Location: no Country
+      ✔ Check isValidLocation with Location: no City
+      ✔ Check isValidLocation with Location: Wrong Format
+      ✔ Check isValidLocation with Location: Wrong Format
+      ✔ Check isValidLocation with Location: Correct Format with CheckOnly Option
+      ✔ Check isValidLocation with Location: no Country with CheckOnly Option
+      ✔ Check isValidLocation with Location: no City with CheckOnly Option
+      ✔ Check isValidLocation with Location: Wrong Format with CheckOnly Option
+      ✔ Check isValidLocation with Location: Wrong Format with CheckOnly Option
+    Guard Class tests: isValidDay()
+      ✔ Check isValidDay with String with no CheckOnly Option
+      ✔ Check isValidDay with String with CheckOnly Option
+      ✔ Check isValidDay with AlphaNumeric with no CheckOnly Option
+      ✔ Check isValidDay with AlphaNumeric with CheckOnly Option
+      ✔ Check isValidDay with Numeric with no CheckOnly Option
+      ✔ Check isValidDay with Numeric with CheckOnly Option
+      ✔ Check isValidDay with Date (DD-MM-YYYY) with no CheckOnly Option
+      ✔ Check isValidDay with Date (DD-MM-YYYY) with CheckOnly Option
+      ✔ Check isValidDay with Date (YYYY-MM-DD) with no CheckOnly Option
+      ✔ Check isValidDay with Date (YYYY-MM-DD) with CheckOnly Option
+      ✔ Check isValidDay with Date (YY-M-D) with no CheckOnly Option
+      ✔ Check isValidDay with Date (YY-M-D) with CheckOnly Option
+      ✔ Check isValidDay with Date (YY-MM-D) with no CheckOnly Option
+      ✔ Check isValidDay with Date (YY-MM-D) with CheckOnly Option
+      ✔ Check isValidDay with Date (YY-MM-DD) with no CheckOnly Option
+      ✔ Check isValidDay with Date (YY-MM-DD) with CheckOnly Option
+      ✔ Check isValidDay with Date (DD/MM/YYYY) with no CheckOnly Option
+      ✔ Check isValidDay with Date (DD/MM/YYYY) with CheckOnly Option
+      ✔ Check isValidDay with nonSQL injection with no CheckOnly Option
+      ✔ Check isValidDay with nonSQL injection with CheckOnly Option
+
+  API Tests
+    Post API
+      ✔ post api with correct information
+      ✔ post api with incorrect firstName
+      ✔ post api with incorrect lastName
+      ✔ post api with incorrect date
+      ✔ post api with incorrect location
+      ✔ post api with numeric firstName
+      ✔ post api with nonSql injection
+
+  API Tests
+    Delete API
+      ✔ Delete api with incorrect UID
+      ✔ Delete api with correct information
+      ✔ Delete api with nonSql injection
+      ✔ Delete api with numeric
+      ✔ Delete api with sneaky nonsql injection in json
+
+  API Tests
+    Update API
+      ✔ Update api with incorrect UID
+      ✔ Update api with correct information: firstname change only
+      ✔ Update api with correct information: lastname change only
+      ✔ Update api with correct information: birthdate change only
+      ✔ Update api with correct information: location change only
+      ✔ Update api with correct information: firstname and lastname change only
+      ✔ Update api with correct information: birthdate and location change only
+      ✔ Update api with correct information: all change 
+      ✔ Update api with nonSql injection
+      ✔ Update api with numeric
+      ✔ Update api with sneaky nonsql injection in json
+
+
+  85 passing (154ms)
