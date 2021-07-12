@@ -19,9 +19,7 @@ cron.schedule('*/30 * * * *', () => {
 
     let UTCtime = parseInt(moment.utc().format("HH"));
     if (moment.utc().format("mm") == 30 ){
-        console.log(UTCtime);
         UTCtime+=0.5;
-        console.log(UTCtime);
     }
     if (UTCtime < 21 && UTCtime >= 0) {
         timeshift.push(9 - UTCtime);
