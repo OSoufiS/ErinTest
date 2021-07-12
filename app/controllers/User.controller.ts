@@ -10,7 +10,7 @@ const GuardVars = Guard.getInstance();
 const router = Router();
 
 /*router.get('/:id', async (req: Request, res: Response) => {
-  const user = await DI.userRepository.find<User>({UID: req.params.id} ) //({"UID": req.params.id});
+  const user = await DI.userRepository.find({UID: req.params.id} )
   if (!user) {
     return res.status(404).json({ message: 'Error: Please check values and try again' });
   }
@@ -20,10 +20,11 @@ const router = Router();
 router.delete('/:id', async (req: Request, res: Response) => {
   try {
     if(GuardVars.isValidBase64(req.params.id, true)){
-      const user = await DI.userRepository.nativeDelete({"UID": GuardVars.isValidBase64(req.params.id)})
+      const user = await DI.userRepository.remove({UID:GuardVars.isValidBase64(req.params.id) })
       if (!user) {
         return res.status(500).json({ message: 'Error: Please check values and try again' });
       }
+      await DI.userRepository.persist(user).flush();
       res.status(200).send(''); 
     }
   } catch (e) {
