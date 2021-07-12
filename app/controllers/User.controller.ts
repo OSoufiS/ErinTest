@@ -9,46 +9,50 @@ var moment = require('moment-timezone');
 const GuardVars = Guard.getInstance();
 const router = Router();
 
-router.get('/:id', async (req: Request, res: Response) => {
+/*router.get('/:id', async (req: Request, res: Response) => {
   const user = await DI.userRepository.find<User>({UID: req.params.id} ) //({"UID": req.params.id});
   if (!user) {
     return res.status(404).json({ message: 'Error: Please check values and try again' });
   }
   res.json(user);
-});
+});*/
 
 router.delete('/:id', async (req: Request, res: Response) => {
   try {
     if(GuardVars.isValidBase64(req.params.id, true)){
       const user = await DI.userRepository.nativeDelete({"UID": GuardVars.isValidBase64(req.params.id)})
       if (!user) {
-        return res.status(404).json({ message: 'Error: Please check values and try again' });
+        return res.status(500).json({ message: 'Error: Please check values and try again' });
       }
       res.status(200).send(''); 
     }
   } catch (e) {
-    return res.status(400).json({ message: "" });
+    return res.status(500).send('Error: Please check values and try again');
   }
 });
 
 router.post('/', async (req: Request, res: Response) => {
   if (!GuardVars.isString(req.body.firstName,true) || !GuardVars.isString(req.body.lastName, true) || !GuardVars.isValidDay(req.body.birthdate, true) || !GuardVars.isValidLocation(req.body.location,true)) {
-    res.status(400);
-    return res.json({ message: 'Error: Please check values and try again' });
+    return res.status(500).send('Error: Please check values and try again');
   }
   else{
     try {
+      //Make sure not already existing
+      let jsonUID =`{"firstName":"${GuardVars.isString(req.body.firstName)}","lastName":"${GuardVars.isString(req.body.lastName)}","birthdate":"${GuardVars.isValidDay(req.body.birthdate)}"}`;
+      let UID = new Buffer(jsonUID).toString('base64');
+      let checkIfUserExists = await DI.userRepository.findOne({UID: UID});
+      if(checkIfUserExists){
+        return res.status(500).send('Error: Please check values and try again');
+      }
+      //proceed to insert
       const user = new User(GuardVars.isString(req.body.firstName), GuardVars.isString(req.body.lastName), GuardVars.isValidDay(req.body.birthdate), GuardVars.isValidLocation(req.body.location));
       wrap(user).assign(req.body);
       await DI.userRepository.persist(user).flush();
       res.status(201).send('');
     } catch (e) {
-      return res.status(400).json({ message: e.message });
+      return res.status(500).send('Error: Please check values and try again');
     }
-
   }
-
-  
 });
 
 router.put('/:id', async (req: Request, res: Response) => {
@@ -81,7 +85,7 @@ router.put('/:id', async (req: Request, res: Response) => {
 
     res.status(204).send('');
   } catch (e) {
-    return res.status(400).json({ message: e.message });
+    return res.status(500).send('Error: Please check values and try again');
   }
 });
 

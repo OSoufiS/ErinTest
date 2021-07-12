@@ -17,7 +17,12 @@ cron.schedule('*/30 * * * *', () => {
      * 3. to timezone to query DB for users
      */
 
-    let UTCtime = moment.utc().format("HH");
+    let UTCtime = parseInt(moment.utc().format("HH"));
+    if (moment.utc().format("mm") == 30 ){
+        console.log(UTCtime);
+        UTCtime+=0.5;
+        console.log(UTCtime);
+    }
     if (UTCtime < 21 && UTCtime >= 0) {
         timeshift.push(9 - UTCtime);
     }
@@ -34,6 +39,7 @@ async function getUsersandSendMessage(timezone) {
     if (GuardVars.isNumeric(timezone, true)) {
         const result = await DI.userRepository.find({ TimeZoneNumber: GuardVars.isNumeric(timezone) });
         if (result) {
+            
             result.forEach((element) => {
                 try {
                     // ---- check for birthday

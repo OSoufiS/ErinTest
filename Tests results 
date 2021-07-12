@@ -1,8 +1,6 @@
 > erintest@1.0.0 test /Users/omar/ErinTest
 > mocha -r ts-node/register 'app/tests/TestClass.ts'
 
-
-
   Guard Tests
     Guard Class tests: isString()
       ✔ Check isString with String with no CheckOnly Option

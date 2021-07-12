@@ -34,13 +34,21 @@ export class User extends UsersBase {
     super();
     this.firstName = firstName;
     this.lastName = lastName;
-    this.birthdateUTC = moment.tz(birthdate,location).utc().format();
+    this.birthdateUTC = moment.tz(birthdate + " 09:00",location).utc().format();
     this.location = location;
     let jsonUID =`{"firstName":"${firstName.toString()}","lastName":"${lastName.toString()}","birthdate":"${birthdate.toString()}"}`;
     this.UID = new Buffer(jsonUID).toString('base64');
-    this.TimeZoneNumber = parseInt(moment.tz(location).format("Z"));
+    this.TimeZoneNumber = this.setTimeZone(location);
     this.TimeZoneWord = moment.tz(location).zoneAbbr();
-    //this.anniversaryUTC = moment.tz(anniversary + ' 09:00' ,location).utc().format();
+    //this.anniversaryUTC = moment.tz(anniversary " 09:00",location).utc().format();
+  }
+
+  private setTimeZone (location){
+    let hour = parseInt(moment.tz(location).format("Z"));
+    if(parseInt(moment.tz(location).format("Z").split(":")[1]) == 30){
+      hour+=0.5
+    }
+    return hour
   }
 
 }

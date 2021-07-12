@@ -54,7 +54,7 @@ class HappyBirthday implements AbstractHappyBirthday {
         const options = {
             hostname: "hookb.in",
             port: 443,
-            path: "/mZZgEapO2lFeqq71QQw2",
+            path: "/2qq2OkaqMpcdzq88z1bN",
             method: "POST",
             headers: {
               "Content-Type": "application/json",
